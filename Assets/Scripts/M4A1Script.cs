@@ -7,11 +7,12 @@ public class M4A1Script : MonoBehaviour {
 
 	float timer;
 
-	Camera camera;
+	Camera camera;  //kanske bara använd main.camera ist?
 	Ray ray;
 	Vector3 centerOfScreen;
 	[SerializeField] GameObject muzzle_flash;
-	[SerializeField] Transform muzzle_flash_spawnPoint;
+    [SerializeField] Transform muzzle_flash_spawnPoint;
+    [SerializeField] GameObject collision_particle; // TODO: skapa ett abstraktionslager så inte vapnet behöver hantera detta
 
 	void Start () {
 		timer = delayTime; //the gun should be ready at start
@@ -37,15 +38,18 @@ public class M4A1Script : MonoBehaviour {
 	
 
 		if (Input.GetMouseButton (0)) {
-			
 			timer+=Time.deltaTime; // make the timer independent of frame rate.
-			Debug.Log (isReady());
+
 			if (isReady ()) {
 				//spawn the muzzle flash effect (particle system)
 				GameObject flash = (GameObject)Instantiate (muzzle_flash, muzzle_flash_spawnPoint.position, Quaternion.identity);
 				Destroy (flash, 0.2f);
-				if (Physics.Raycast (ray, out hit))
-					Debug.Log (hit.transform.name);
+                if (Physics.Raycast (ray, out hit)) {   // Nice syntaktiskt socker med 'out'
+                    Debug.Log (hit.transform.name);
+                    GameObject collision = Instantiate (collision_particle, hit.point, Quaternion.identity);
+                    Destroy (collision, 3f);    // When new class for collisions are created use a queue to delete particls when there's too many
+                }
+
 				timer = 0f; //reset the timer
 			}
 
