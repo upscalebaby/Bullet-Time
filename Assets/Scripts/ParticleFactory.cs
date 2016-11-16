@@ -25,7 +25,7 @@ public class ParticleFactory : MonoBehaviour {
         switch(pos.collider.gameObject.tag) {
             case "floor":
                 particle = GameObject.Instantiate(floor_particle, pos.point, Quaternion.FromToRotation(pos.point, pos.normal));
-                particle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);  // TODO: Doesnt seem to work, scale particle somwhere else
+                particle.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 break;
             case "cubes":
                 particle = GameObject.Instantiate(cube_particle, pos.point, Quaternion.FromToRotation(pos.point, pos.normal));
