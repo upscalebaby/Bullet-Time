@@ -4,6 +4,7 @@ using UnityEngine;
 public class M4A1Script : MonoBehaviour {
 
 	public float delayTime=0.2f; //To tweak the rate of fire
+    public ParticleFactory particleFactory;     // This is not very clean, particleFactory should be globally accessible
 
 	float timer;
 
@@ -44,10 +45,9 @@ public class M4A1Script : MonoBehaviour {
 				//spawn the muzzle flash effect (particle system)
 				GameObject flash = (GameObject)Instantiate (muzzle_flash, muzzle_flash_spawnPoint.position, Quaternion.identity);
 				Destroy (flash, 0.2f);
-                if (Physics.Raycast (ray, out hit)) {   // Nice syntaktiskt socker med 'out'
+                if (Physics.Raycast (ray, out hit)) {
                     Debug.Log (hit.transform.name);
-                    GameObject collision = Instantiate (collision_particle, hit.point, Quaternion.identity);
-                    Destroy (collision, 3f);    // When new class for collisions are created use a queue to delete particls when there's too many
+                    particleFactory.spawnParticle(hit);
                 }
 
 				timer = 0f; //reset the timer
