@@ -8,7 +8,6 @@ public class M4A1Script : MonoBehaviour {
 
 	float timer;
 
-	Camera camera;  //kanske bara använd main.camera ist?
 	Ray ray;
 	Vector3 centerOfScreen;
 	[SerializeField] GameObject muzzle_flash;
@@ -16,11 +15,11 @@ public class M4A1Script : MonoBehaviour {
     [SerializeField] GameObject collision_particle; // TODO: skapa ett abstraktionslager så inte vapnet behöver hantera detta
 
 	void Start () {
+
 		timer = delayTime; //the gun should be ready at start
-		camera = Camera.main;
 		centerOfScreen = new Vector3 (0.5f, 0.5f, 0);
 		//Make the gun target the middle of the screen (0.5; 0.5) where the crosshair is
-		transform.LookAt (camera.ScreenToViewportPoint (centerOfScreen));
+		transform.LookAt (Camera.main.ScreenToViewportPoint (centerOfScreen));
 		transform.RotateAround (transform.position, Vector3.up, 180f); // FIXME: Change the guns rotation before importing it
 	}
 		
@@ -33,7 +32,7 @@ public class M4A1Script : MonoBehaviour {
 
 	void Update () {
 		//ray cast at the middle of the screen
-		ray = camera.ViewportPointToRay (centerOfScreen);
+		ray = Camera.main.ViewportPointToRay (centerOfScreen);
 		//TODO: Add some recoil?
 		RaycastHit hit;
 	

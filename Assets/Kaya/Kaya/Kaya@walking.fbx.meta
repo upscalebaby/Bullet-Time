@@ -203,7 +203,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     animationCompression: 1
     animationRotationError: 0.5
-    animationPositionError: 0.5
+    animationPositionError: 0.2
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
@@ -222,12 +222,12 @@ ModelImporter:
       loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 0
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 0
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 1
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
